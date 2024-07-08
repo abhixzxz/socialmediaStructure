@@ -1,0 +1,35 @@
+/* src/components/PhotoGallery.css */
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px;
+}
+
+.photo-item {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+border-radius: 2%;
+}
+
+.photo-caption {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+}
