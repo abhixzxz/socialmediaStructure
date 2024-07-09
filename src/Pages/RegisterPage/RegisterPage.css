@@ -1,4 +1,4 @@
-.container{
+/* .container{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -116,4 +116,153 @@
         align-items: center;
         background-color: #ffff;
     }
+} */
+
+.register-container {
+    font-family: sans-serif;
+    background-color: #edf8f1;
+    
+}
+.formWrapperInputs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.register-min-height {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    
+}
+
+.register-form {
+    display: grid;
+    /* grid-template-columns: repeat(3, 1fr); */
+    gap: 16px;
+}
+
+.register-input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-input-group.full-width {
+    grid-column: span 2;
+}
+
+.register-button {
+    grid-column: span 2;
+    margin-top: 16px;
+}
+.register-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 1rem;
+    max-width: 72rem;
+    width: 100%;
+}
+
+.register-card {
+    border: 1px solid #d1d5db;
+    width: 1900px;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    max-width: 28rem;
+    box-shadow: 0 2px 22px -4px rgba(93, 96, 127, 0.2);
+    margin: auto;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.register-title {
+    text-align: center;
+    color: #1DB954;
+    font-size: 1.875rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.register-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    line-height: 1.625;
+    text-align: center;
+}
+
+.register-input-group {
+    margin-bottom: 0.5rem;
+}
+
+.register-label {
+    color: #1f2937;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.register-input {
+    width: 100%;
+    font-size: 0.875rem;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    outline-color: #1DB954;
+}
+
+.register-error {
+    color: #0e7e36;
+    font-size: 0.875rem;
+}
+
+.register-button {
+    width: 100%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    background-color: #1DB954;
+    outline: none;
+}
+
+.register-button:hover {
+    background-color: #b45309;
+}
+
+.register-link {
+    color: #b45309;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.register-image-container {
+    height: 600px;
+    width: 100%;
+    margin-top: 2rem;
+    float: right;
+    margin-right: auto;
+    text-align: center;
+}
+
+.register-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+    border-radius: 8%;
 }

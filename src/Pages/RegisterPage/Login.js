@@ -1,106 +1,134 @@
-import React, { useEffect, useState } from 'react'
-import {FiMail} from "react-icons/fi"
-import {RiLockPasswordLine} from "react-icons/ri"
-import "../RegisterPage/RegisterPage.css"
-import { Link, useNavigate } from 'react-router-dom'
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
+import LoginVectorImg from "../../assets/images/login.jpeg";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import "./LoginPage.css";
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
+});
 
-const Login = () => {
-    const navigate =useNavigate()
-    const [error,setError] =useState({})
-    const [submit,setSubmit] =useState(false)
-  
-    const [data,setData] =useState({
-        email:"",
-        password:"",
-    })
+const LoginPage = () => {
+  const navigate = useNavigate();
 
-    const handleChange=(e)=>{
-        const newObj={...data,[e.target.name]:e.target.value}
-        setData(newObj)
-    }
- 
-
-    const handleSignUp=(e)=>{
-        e.preventDefault()
-       setError(validationLogin(data))
-       setSubmit(true)
-    }
-
-    useEffect(()=>{
-        if(Object.keys(error).length === 0 && submit){
-            navigate("/home")
-        }
-    },[error])
-
-
-
-   function validationLogin(data){
-        const error ={}
-
-        const emailPattern= /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-        const passwordPattern= /^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g;
-
-        if(data.email === ""){
-            error.email ="* Email is Required"
-        }
-        else if(!emailPattern.test(data.email)){
-            error.email="* Email did not match"
-        }
-
-        
-        if(data.password === ""){
-            error.password = "* Password is Required"
-        }
-        else if(!passwordPattern.test(data.password)){
-            error.password="* Password not valid"
-        }
-        
-        return error
-   }
-
-
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        // Handle form submission
+      } catch (error) {
+        setSubmitting(false);
+      }
+    },
+  });
 
   return (
-    <div className="container">
-        <div className="container-form">
-            <form onSubmit={handleSignUp}>
-                <h1>Login</h1>
-                <p>Please sign in to continue.</p>
-                <div className="inputBox">
-                    <FiMail className='mail'/>
-                    <input type="email" 
-                            name="email" 
-                            id="email" 
-                            onChange={handleChange}
-                            placeholder='Email'/> 
-                </div>
-                {error.email && <span style={{color:"red",display:"block",marginTop:"5px"}}>{error.email}</span>}
+    <div className="login-container">
+      <div className="login-min-height">
+        <div className="login-grid">
+          <div className="login-card">
+            <form onSubmit={formik.handleSubmit} className="login-form">
+              <div>
+                <h3 className="login-title">Sign in</h3>
+                <p className="login-description">
+                  Sign in to your account and explore a world of possibilities.
+                </p>
+              </div>
 
-                <div className="inputBox">
-                    <RiLockPasswordLine className='password'/>
-                    <input type="password" 
-                            name="password" 
-                            id="password" 
-                            onChange={handleChange}
-                            placeholder='Password'/>
-                </div>
-                {error.password && <span style={{color:"red",display:"block",marginTop:"5px"}}>{error.password}</span>}
-               
+              <div className="login-input-group">
+                <label className="login-label" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  className="login-input"
+                  placeholder="Enter Email"
+                />
+                {formik.touched.email && formik.errors.email ? (
+                  <div className="login-error">{formik.errors.email}</div>
+                ) : null}
+              </div>
 
-                <div className='divBtn'>
-                    <small className='FG'>Forgot Password?</small>
-                    <button type='submit' className='loginBtn'>LOGIN</button>
+              <div className="login-input-group">
+                <label className="login-label" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                  required
+                  className="login-input"
+                  placeholder="Enter password"
+                />
+                {formik.touched.password && formik.errors.password ? (
+                  <div className="login-error">{formik.errors.password}</div>
+                ) : null}
+              </div>
+
+              <div className="login-options">
+                <div className="login-checkbox">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="login-checkbox-input"
+                  />
+                  <label htmlFor="remember-me" className="login-checkbox-label">
+                    Remember me
+                  </label>
                 </div>
-                
+
+                <Link to="/forgot-password" className="login-forgot-password">
+                  Forgot your password?
+                </Link>
+              </div>
+
+              <button
+                type="submit"
+                disabled={formik.isSubmitting}
+                className="login-button"
+              >
+                {formik.isSubmitting ? "Logging in..." : "Log in"}
+              </button>
+
+              <p className="login-link">
+                Don't have an account?{" "}
+                <Link to="/register" className="login-forgot-password">
+                  Register here
+                </Link>
+              </p>
             </form>
+          </div>
 
-            <div className='dont'>
-                <p>Don't have an account? <Link to="/signup"><span>Sign up</span></Link></p>
-            </div>
+          <div className="login-image-container">
+            <img
+              src={LoginVectorImg}
+              className="login-image"
+              alt="Login illustration"
+            />
+          </div>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default LoginPage;

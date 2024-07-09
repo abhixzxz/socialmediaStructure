@@ -6,12 +6,15 @@ import { Route, Routes } from "react-router-dom";
 import Notification from "./Pages/Notification/Notification";
 import Login from "./Pages/RegisterPage/Login";
 import SignUp from "./Pages/RegisterPage/SignUp";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [friendProfile, setFriendsProfile] = useState([]);
 
   return (
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route
           path="/home"
@@ -24,7 +27,7 @@ const App = () => {
         />
         <Route path="/notification" element={<Notification />} />
         <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/register" element={<SignUp />} />
       </Routes>
     </div>
   );
